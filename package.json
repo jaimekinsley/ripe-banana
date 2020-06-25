@@ -24,8 +24,10 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
+    "chance": "^1.1.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.20"
+    "mongoose": "^5.9.20",
+    "superagent": "^5.2.2"
   }
 }
