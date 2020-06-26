@@ -12,8 +12,7 @@ describe('tests reviewer routes', () => {
         expect(res.body).toEqual({
           _id: expect.anything(),
           name: 'Alison Bechdel',
-          company: 'imdb',
-          __v: 0
+          company: 'imdb'
         });
       });
   });

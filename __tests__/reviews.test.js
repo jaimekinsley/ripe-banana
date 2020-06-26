@@ -28,4 +28,20 @@ describe('review routes', () => {
         });
       });
   });
+
+  it('finds all reviews with GET', async() => {
+    const reviews = prepare(await Review.find());
+
+    return await request(app)
+      .get('/api/v1/reviews')
+      .then(res => {expect(res.body).toEqual(reviews);});
+  });
+
+  it('delete by id', async() => {
+    const review = prepare(await Review.findOne());
+
+    return await request(app)
+      .delete(`/api/v1/reviews/${review._id}`)
+      .then(res => {expect(res.body).toEqual(review);});
+  });
 });

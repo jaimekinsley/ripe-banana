@@ -23,8 +23,7 @@ describe('studio routes', () => {
             city: 'Los Angeles',
             state: 'CA',
             country: 'United States'
-          },
-          __v: 0
+          }
         });
       });
   });

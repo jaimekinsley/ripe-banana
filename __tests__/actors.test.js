@@ -17,8 +17,7 @@ describe('Actor tests', () => {
           _id: expect.anything(),
           name: 'Keanu Reeves',
           dob: new Date('August 19, 1975 23:15:30').toISOString(),
-          pob: 'Los Angeles',
-          __v: 0
+          pob: 'Los Angeles'
         });
       });
   });

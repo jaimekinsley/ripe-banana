@@ -42,10 +42,18 @@ describe('film routes', () => {
   });
 
   it('gets a film by id with GET', async() => {
-    const film = prepare(await Film.findOne().select({ title: true, released: true, studio: true, cast: true }));
+    const film = prepare(await Film.findOne()
+      .select({ title: true, released: true, studio: true, cast: true })
+      .populate({
+        path:'reviews',
+        select: { _id: true, rating: true, review: true, 
+          reviewer: true },
+        populate : { path: 'reviewer', select: { _id : true, name: true } }
+      }));
 
     return await request(app)
       .get(`/api/v1/films/${film._id}`)
-      .then(res => {expect (res.body).toEqual(film);});
+      .then(res => {
+        expect (res.body).toEqual(film);});
   });
 });
