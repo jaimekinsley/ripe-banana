@@ -28,7 +28,12 @@ describe('tests reviewer routes', () => {
   });
 
   it('can get reviewer by GET id', async() => {
-    const reviewer = prepare(await Reviewer.findOne());
+    const reviewer = prepare(await Reviewer.findOne()
+      .populate({
+        path:'reviews',
+        select: { _id: true, rating: true, review: true, film: true },
+        populate : { path: 'film', select: { _id : true, title: true } }
+      }));
 
     return await request(app)
       .get(`/api/v1/reviewers/${reviewer._id}`)
