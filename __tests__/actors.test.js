@@ -30,10 +30,20 @@ describe('Actor tests', () => {
   });
 
   it('retrieves an actor with GET by id', async() => {
-    const actor = prepare(await Actor.findOne()); //need to add populate for films
+    const actor = prepare(await Actor.findOne()
+      .populate({ path: 'films',
+        select: { _id: true, title: true, released: true } })
+      .lean()
+      .then(actor => {
+        actor.films.forEach(film => {
+          delete film.cast;
+        });
+        return actor;
+      }));
     return await request(app)
       .get(`/api/v1/actors/${actor._id}`)
-      .then(res => {expect(res.body).toEqual(actor);});
+      .then(res => {
+        console.log(res.body);
+        expect(res.body).toEqual(actor);});
   });
-
 });
