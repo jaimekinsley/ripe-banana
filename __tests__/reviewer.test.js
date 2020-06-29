@@ -43,19 +43,23 @@ describe('tests reviewer routes', () => {
       });
   });
 
-  // it('can PATCH a reviewer by id', async() => {
-  //   const reviewer = prepare(await Reviewer.findOne());
+  it('can PATCH a reviewer by id', async() => {
+    const reviewer = prepare(await Reviewer.findOne());
 
-  //   return await request(app)
-  //     .patch(`/api/v1/reviewers/${reviewer._id}`)
-  //     .send({
-  //       name: { }
-  //     })
-  //     .then(res => {
-  //       expect(res.body).toEqual(reviewer);
-  //     });
+    return await request(app)
+      .patch(`/api/v1/reviewers/${reviewer._id}`)
+      .send({
+        name: 'updated'
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.anything(),
+          company: expect.anything(),
+          name: 'updated'
+        });
+      });
     
-  // });
+  });
 
   it('can delete a reviewer by id if there are no reviews', async() => {
     const reviewer = prepare(await Reviewer.create({ name: 'new persons', company: 'imdb' }));
