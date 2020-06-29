@@ -30,7 +30,7 @@ describe('review routes', () => {
   });
 
   it('finds all reviews with GET', async() => {
-    const reviews = prepare(await Review.find());
+    const reviews = prepare(await Review.top100());
 
     return await request(app)
       .get('/api/v1/reviews')
