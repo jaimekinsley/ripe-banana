@@ -29,11 +29,13 @@ describe('studio routes', () => {
   });
 
   it('gets at studio by id with GET', async() => {
-    const studio = prepare(await Studio.findOne());
+    const studio = prepare(await Studio.findOne()
+      .populate({ path: 'films', 
+        select: { _id: true, title: true, studio: true } }));
 
     return await request(app)
       .get(`/api/v1/studios/${studio._id}`)
-      .then(res => {
+      .then(res => { 
         expect(res.body).toEqual(studio);
       });
   });
